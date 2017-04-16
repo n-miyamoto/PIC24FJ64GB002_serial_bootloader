@@ -48,6 +48,14 @@ void SYSTEM_Initialize (void)
 	RPOR5bits.RP10R = 8;    // SCK1??RP2??
 	RPOR3bits.RP7R = 7;     // SDO1??RP3??
 }
+
+
+void __attribute__(( interrupt, auto_psv )) _U1RXInterrupt(void){
+	IFS0bits.U1RXIF = 0;
+	char chr=ReadUART1();
+    printf("intrpt!!! : %d\r\n",chr);
+    return ;
+}
    
 
 int main(void) {
@@ -83,7 +91,7 @@ int main(void) {
 
 	OpenUART1(config1, config2,8 );
 	ConfigIntUART1( UART_RX_INT_EN & UART_TX_INT_DIS );
-	IEC0bits.U1RXIE = 0; //disable interrupt
+	IEC0bits.U1RXIE = 1; //disable interrupt
     
     while(1){
         delay_ms(1000);
