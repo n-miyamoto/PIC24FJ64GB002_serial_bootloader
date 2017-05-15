@@ -254,6 +254,8 @@ SECTIONS
 /*
 ** Interrupt Vector Table
 */
+
+
 .ivt __IVT_BASE :
   {
     LONG( DEFINED(__ReservedTrap0)    ? ABSOLUTE(__ReservedTrap0)    :
@@ -515,6 +517,8 @@ SECTIONS
 /*
 ** Alternate Interrupt Vector Table
 */
+
+
 .aivt __AIVT_BASE :
   {
     LONG( DEFINED(__AltReservedTrap0)    ? ABSOLUTE(__AltReservedTrap0)    :
@@ -897,7 +901,10 @@ SECTIONS
          (DEFINED(__Interrupt117)       ? ABSOLUTE(__Interrupt117)       :
          ABSOLUTE(__DefaultInterrupt)));
   } >aivt
-} /* SECTIONS */
+
+}/* SECTIONS */
+
+
 
 
 /*

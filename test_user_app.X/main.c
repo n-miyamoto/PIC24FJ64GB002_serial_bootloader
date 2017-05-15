@@ -49,12 +49,17 @@ void SYSTEM_Initialize (void)
 	RPOR3bits.RP7R = 7;     // SDO1??RP3??
 }
 
+int a=0;
+
+void __attribute__(( interrupt, auto_psv )) _U1RXInterrupt(void);
 
 void __attribute__(( interrupt, auto_psv )) _U1RXInterrupt(void){
-	IFS0bits.U1RXIF = 0;
-	char chr=ReadUART1();
-    printf("intrpt!!! : %d\r\n",chr);
-    return ;
+	
+	//char chr=ReadUART1();
+    //printf("\r\nintrpt!!! \r\n");
+    a++;
+    IFS0bits.U1RXIF = 0;
+    //return ;
 }
    
 
@@ -95,7 +100,7 @@ int main(void) {
     
     while(1){
         delay_ms(1000);
-        printf("hello !!");
+        printf("hello !!:%d\r\n",a);
     }
     return 0;
 }
